@@ -757,15 +757,15 @@ def get_sellInfo_by_url(url):
         res.update({browse_num:''})
     else:
         sellInfoMsg = sellInfoMsg.findAll("label")
+        key_type = {
+                    1: u'listing_price',
+                    2: u'cycle',
+                    3: u'adjust_num',
+                    4: u'view_num',
+                    5: u'attention_num',
+                    6: u'browse_num',
+                    }
         for info in sellInfoMsg:
-            key_type = {
-            1: u'listing_price',
-            2: u'cycle',
-            3: u'adjust_num',
-            4: u'view_num',
-            5: u'attention_num',
-            6: u'browse_num',
-            }
             try:
                 num += 1;
                 key_info = key_type[num]
