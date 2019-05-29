@@ -771,12 +771,8 @@ def get_sellInfo_by_url(url):
                 key_info = key_type[num]
                 value_info = info.get_text().strip()
                 res.update({key_info:value_info})
-                logging.info(num)
-                logging.info(key_info)
-                logging.info(value_info)
             except:
                 continue
-    logging.info(res)
     return res
 
 def check_block(soup):
