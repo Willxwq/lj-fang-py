@@ -92,6 +92,12 @@ class Sellinfo(BaseModel):
 	source 		= CharField()
 	totalPrice 	= CharField()
 	unitPrice 	= CharField()
+	listing_price 	= CharField()
+	cycle 	= CharField()
+	adjust_num 	= CharField()
+	view_num 	= CharField()
+	attention_num 	= CharField()
+	browse_num 	= CharField()
 	dealdate 	= CharField(null=True)
 	updatedate 	= DateTimeField(default=datetime.datetime.now)
 

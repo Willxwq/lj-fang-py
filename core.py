@@ -773,9 +773,6 @@ def get_sellInfo_by_url(url):
                 res.update({key_info:value_info})
             except:
                 continue
-
-    logging.info(url)
-    logging.info(res)
     return res
 
 def check_block(soup):
