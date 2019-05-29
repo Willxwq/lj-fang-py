@@ -755,7 +755,7 @@ def get_sellInfo_by_url(url):
         res.update({attention_num:''})
         res.update({browse_num:''})
     else:
-        sellInfoMsg = sellInfoMsg.findAll("span")
+        sellInfoMsg = sellInfoMsg.findAll("label")
 
         for info in sellInfoMsg:
             logging.info(info)
