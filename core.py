@@ -228,6 +228,9 @@ def get_sell_percommunity(communityname):
 
                     dealDate= name.find("div", {"class":"dealDate"})
                     info_dict.update({u'dealdate':dealDate.get_text().strip().replace('.','-')})
+                    communityinfo = get_sellInfo_by_url(housetitle.a.get('href'))
+                    for key, value in communityinfo.items():
+                        info_dict.update({key:value})
 
                 except:
                     continue
@@ -735,6 +738,31 @@ def get_communityinfo_by_url(url):
                 continue
     return res
 
+def get_sellInfo_by_url(url):
+    source_code = misc.get_source_code(url)
+    soup = BeautifulSoup(source_code, 'lxml')
+
+    if check_block(soup):
+        return
+
+    sellInfoMsg = soup.find("div", {"class":"msg"})
+    res = {}
+    if sellInfoMsg == []:
+        res.update({cycle:''})
+        res.update({listing_price:''})
+        res.update({adjust_num:''})
+        res.update({view_num:''})
+        res.update({attention_num:''})
+        res.update({browse_num:''})
+    else:
+        sellInfoMsg = sellInfoMsg.findAll("span")
+
+        for info in sellInfoMsg:
+            logging.info(info)
+
+            except:
+                continue
+    return res
 
 def check_block(soup):
     if soup.title.string == "414 Request-URI Too Large":
