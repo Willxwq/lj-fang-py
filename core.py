@@ -768,7 +768,7 @@ def get_sellInfo_by_url(url):
             }
             try:
                 num += 1;
-                key_info = key_type[key_info]
+                key_info = key_type[num]
                 value_info = info.get_text().strip()
                 res.update({key_info:value_info})
                 logging.info(num)
