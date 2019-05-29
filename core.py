@@ -772,6 +772,8 @@ def get_sellInfo_by_url(url):
                 value_info = info.get_text().strip()
                 res.update({key_info:value_info})
 
+            except:
+                continue
     logging.info(res)
     return res
 
