@@ -760,8 +760,6 @@ def get_sellInfo_by_url(url):
         for info in sellInfoMsg:
             logging.info(info)
 
-            except:
-                continue
     return res
 
 def check_block(soup):
