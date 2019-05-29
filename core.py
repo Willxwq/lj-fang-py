@@ -747,6 +747,7 @@ def get_sellInfo_by_url(url):
 
     sellInfoMsg = soup.find("div", {"class":"msg"})
     res = {}
+    num = 0
     if sellInfoMsg == []:
         res.update({cycle:''})
         res.update({listing_price:''})
@@ -756,10 +757,22 @@ def get_sellInfo_by_url(url):
         res.update({browse_num:''})
     else:
         sellInfoMsg = sellInfoMsg.findAll("label")
-        logging.info(url)
         for info in sellInfoMsg:
-            logging.info(info)
+            key_type = {
+            1: u'listing_price',
+            2: u'cycle',
+            3: u'adjust_num',
+            4: u'view_num',
+            5: u'attention_num',
+            6: u'browse_num',
+            }
+            try:
+                num += 1;
+                key_info = key_type[key_info]
+                value_info = info.get_text().strip()
+                res.update({key_info:value_info})
 
+    logging.info(res)
     return res
 
 def check_block(soup):
