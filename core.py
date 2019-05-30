@@ -228,6 +228,14 @@ def get_sell_percommunity(communityname):
 
                     dealDate= name.find("div", {"class":"dealDate"})
                     info_dict.update({u'dealdate':dealDate.get_text().strip().replace('.','-')})
+
+                    aa = name.find("span", {"class":"dealCycleeInfo"})
+
+                    aaa = aa.findAll("span")
+                    logging.info(aaa)
+                    logging.info(aaa[0])
+                    logging.info(aaa[1])
+
                     communityinfo = get_sellInfo_by_url(housetitle.a.get('href'))
                     for key, value in communityinfo.items():
                         info_dict.update({key:value})
