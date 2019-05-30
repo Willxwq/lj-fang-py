@@ -233,8 +233,8 @@ def get_sell_percommunity(communityname):
 
                     aaa = aa.findAll("span")
                     logging.info(aaa)
-                    logging.info(aaa[0])
-                    logging.info(aaa[1])
+                    #logging.info(aaa[0])
+                    #logging.info(aaa[1])
 
                     communityinfo = get_sellInfo_by_url(housetitle.a.get('href'))
                     for key, value in communityinfo.items():
