@@ -29,14 +29,15 @@ def GetHouseByCommunitylist(communitylist):
 def GetSellByCommunitylist(communitylist):
     logging.info("Get Sell Infomation")
     starttime = datetime.datetime.now()
-    a = 1;
+    page = 1;
+    total = len(communitylist)
     for community in communitylist:
         try:
-            logging.info("Get Sell Infomation num = " + a)
+            logging.info("finish Sell Infomation : %d total pages %d" %(page, total))
             get_sell_percommunity(community)
-            a = a + 1
+            page = page + 1
         except Exception as e:
-            a = a + 1
+            page = page + 1
             logging.error(e)
             logging.error(community + "Fail")
             pass
