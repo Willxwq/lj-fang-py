@@ -241,6 +241,7 @@ def get_sell_percommunity(communityname):
                     #info_dict.update({view_num:''})
                     #info_dict.update({attention_num:''})
                     #info_dict.update({browse_num:''})
+                    logging.info(sellInfoMsg)
                     logging.info(sellInfoMsg[0])
                     logging.info(sellInfoMsg[1])
                     communityinfo = get_sellInfo_by_url(housetitle.a.get('href'))
