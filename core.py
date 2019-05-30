@@ -229,7 +229,7 @@ def get_sell_percommunity(communityname):
                     dealDate= name.find("div", {"class":"dealDate"})
                     info_dict.update({u'dealdate':dealDate.get_text().strip().replace('.','-')})
 
-                    aa = name.find("span", {"class":"dealCycleeInfo"})
+                    aa = name.find("span", {"class":"dealCycleTxt"})
 
                     aaa = aa.findAll("span")
                     logging.info(aaa)
