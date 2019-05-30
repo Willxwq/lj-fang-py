@@ -52,6 +52,7 @@ class Community(BaseModel):
 	house_num   = CharField()
 	price   	= CharField()
 	validdate 	= DateTimeField(default=datetime.datetime.now)
+	useFlg 	    = IntegerField(default=0)
 
 class Houseinfo(BaseModel):
 	houseID 	= CharField(primary_key=True)
