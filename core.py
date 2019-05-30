@@ -36,6 +36,7 @@ def GetSellByCommunitylist(communitylist):
             get_sell_percommunity(community)
             a = a + 1;
         except Exception as e:
+            a = a + 1;
             logging.error(e)
             logging.error(community + "Fail")
             pass
