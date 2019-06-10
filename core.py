@@ -260,7 +260,7 @@ def get_sell_percommunity(communityname):
 
                     communityinfo = get_sellInfo_by_url(housetitle.a.get('href'))
                     for key, value in communityinfo.items():
-                        #info_dict.update({key:value})
+                        info_dict.update({key:value})
 
                 except:
                     continue
