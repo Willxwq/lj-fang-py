@@ -822,4 +822,4 @@ def convertToUX(content):
             tmp = tmp + cr
             continue
         tmp = tmp + repr(cr).replace("u'", "").replace("'","")
-    return tmp.encode("utf-8")
+    return tmp.encode("utf-8").decode("unicode_escape").encode("utf-8")
