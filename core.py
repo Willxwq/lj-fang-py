@@ -10,7 +10,7 @@ import urllib.request
 import logging
 import sys, io
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="urf-8")
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 print(sys.stdout.encoding)
 #logging.basicConfig(filename='/data/wwwlogs/python/sh.log', filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 #logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.ERROR)
