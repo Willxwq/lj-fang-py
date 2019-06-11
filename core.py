@@ -816,7 +816,7 @@ def log_progress(function, address, page, total):
     logging.info("Progress: %s %s: current page %d total pages %d" %(function, address, page, total))
 
 def convertToUX(content):
-    logging.error(content.encode("unicode_escape"))
+    logging.error(content.encode("utf-8"))
     return content.decode().encode("unicode_escape")
 
     tmp = ""
