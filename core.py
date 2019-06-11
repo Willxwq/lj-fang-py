@@ -56,7 +56,7 @@ def GetSellByCommunitylist(communitylist):
         except Exception as e:
             page = page + 1
             logging.error(e)
-            logging.error(community + "Fail")
+            logging.error(convertToUX(community) + "Fail")
             pass
     endtime = datetime.datetime.now()
     logging.info("Run time: " + str(endtime - starttime))
@@ -817,3 +817,12 @@ def check_block(soup):
 
 def log_progress(function, address, page, total):
     logging.info("Progress: %s %s: current page %d total pages %d" %(function, address, page, total))
+
+def convertToUX(content):
+    tmp = ""
+    for cr in content:
+        if (cr=="u" or cr=="'"):
+            tmp = tmp + cr
+            continue
+        tmp = tmp + repr(cr).replace("u'", "").replace("'","")
+    return tmp.decode("unicode_escape").encode("utf-8")
