@@ -41,7 +41,6 @@ def GetHouseNum(communitylist):
     logging.info("Run time: " + str(endtime - starttime))
 
 def GetSellByCommunitylist(communitylist):
-    logging.error("测试测试测试")
     logging.info("Get Sell Infomation")
     starttime = datetime.datetime.now()
     page = 1;
@@ -817,7 +816,7 @@ def log_progress(function, address, page, total):
     logging.info("Progress: %s %s: current page %d total pages %d" %(function, address, page, total))
 
 def convertToUX(content):
-    logging.error(content)
+    logging.error(content.encode("unicode_escape"))
     return content.decode().encode("unicode_escape")
 
     tmp = ""
