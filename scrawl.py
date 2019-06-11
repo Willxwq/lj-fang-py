@@ -4,6 +4,7 @@ import settings
 import logging
 
 logging.basicConfig(filename='/data/wwwlogs/python/sh.log', filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.error('this is a loggging info message')
 def get_communitylist():
 	res = []
 	#for community in model.Community.select().where(model.Community.useFlg == 1):
