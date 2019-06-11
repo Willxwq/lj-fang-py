@@ -41,6 +41,7 @@ def GetHouseNum(communitylist):
     logging.info("Run time: " + str(endtime - starttime))
 
 def GetSellByCommunitylist(communitylist):
+    logging.error("测试测试测试")
     logging.info("Get Sell Infomation")
     starttime = datetime.datetime.now()
     page = 1;
