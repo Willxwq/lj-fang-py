@@ -10,6 +10,7 @@ def get_communitylist():
 	return res
 
 if __name__=="__main__":
+    logging.basicConfig(filename='/data/wwwlogs/python/sh.log', filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.ERROR)
     regionlist = settings.REGIONLIST # only pinyin support
     model.database_init()
     #core.GetHouseByRegionlist(regionlist)

@@ -10,7 +10,7 @@ import urllib.request
 import logging
 
 #logging.basicConfig(filename='/data/wwwlogs/python/sh.log', filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.ERROR)
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.ERROR)
+#logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.ERROR)
 BASE_URL = u"https://%s.lianjia.com/" % (settings.CITY)
 CITY = settings.CITY
 
