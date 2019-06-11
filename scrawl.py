@@ -1,7 +1,7 @@
 import model
 import settings
 import logging
-logging.basicConfig(filename='/data/wwwlogs/python/sh.log', filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(filename=settings.LOGPATH, filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.ERROR)
 import core
 
 def get_communitylist():
@@ -12,6 +12,11 @@ def get_communitylist():
 	return res
 
 if __name__=="__main__":
-    logging.info('this is a loggging info message')
-    logging.error('this is a loggging info message')
+    regionlist = settings.REGIONLIST # only pinyin support
+    model.database_init()
+    #core.GetHouseByRegionlist(regionlist)
+    #core.GetRentByRegionlist(regionlist)
+    #core.GetCommunityByRegionlist(regionlist) # Init,scrapy celllist and insert database; could run only 1st time
+    communitylist = get_communitylist() # Read celllist from database
+    core.GetSellByCommunitylist(communitylist)
 
