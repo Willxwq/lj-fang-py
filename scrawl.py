@@ -1,7 +1,8 @@
-import core
 import model
 import settings
 import logging
+logging.basicConfig(filename='/data/wwwlogs/python/sh.log', filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
+import core
 
 def get_communitylist():
 	res = []
@@ -11,7 +12,6 @@ def get_communitylist():
 	return res
 
 if __name__=="__main__":
-    logging.basicConfig(filename='/data/wwwlogs/python/sh.log', filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
     logging.info('this is a loggging info message')
     logging.error('this is a loggging info message')
 
