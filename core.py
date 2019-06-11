@@ -53,7 +53,7 @@ def GetSellByCommunitylist(communitylist):
         except Exception as e:
             page = page + 1
             logging.error(e)
-            logging.error(convertToUX(community) + "Fail")
+            logging.error(convertToUX(community).decode() + "Fail")
             pass
     endtime = datetime.datetime.now()
     logging.info("Run time: " + str(endtime - starttime))
