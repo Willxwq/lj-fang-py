@@ -1,6 +1,7 @@
 import core
 import model
 import settings
+import logging
 
 def get_communitylist():
 	res = []
