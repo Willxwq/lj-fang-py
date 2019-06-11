@@ -3,6 +3,7 @@ import model
 import settings
 import logging
 
+logging.basicConfig(filename='/data/wwwlogs/python/sh.log', filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 def get_communitylist():
 	res = []
 	#for community in model.Community.select().where(model.Community.useFlg == 1):
@@ -11,7 +12,6 @@ def get_communitylist():
 	return res
 
 if __name__=="__main__":
-    logging.basicConfig(filename='/data/wwwlogs/python/sh.log', filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
     logging.info('this is a loggging info message')
     regionlist = settings.REGIONLIST # only pinyin support
     model.database_init()
