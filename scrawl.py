@@ -3,6 +3,7 @@ import settings
 import logging
 logging.basicConfig(filename=settings.LOGPATH, filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.ERROR)
 import core
+import sys
 
 def get_communitylist():
 	res = []
@@ -12,6 +13,8 @@ def get_communitylist():
 	return res
 
 if __name__=="__main__":
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
     regionlist = settings.REGIONLIST # only pinyin support
     model.database_init()
     #core.GetHouseByRegionlist(regionlist)
