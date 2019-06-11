@@ -22,7 +22,7 @@ def GetHouseByCommunitylist(communitylist):
             get_house_percommunity(community)
         except Exception as e:
             logging.error(e)
-            logging.error(community + "Fail")
+            logging.error(convertToUX(community) + "Fail")
             pass
     endtime = datetime.datetime.now()
     logging.info("Run time: " + str(endtime - starttime))
@@ -35,7 +35,7 @@ def GetHouseNum(communitylist):
             get_house_percommunity(community)
         except Exception as e:
             logging.error(e)
-            logging.error(community + "Fail")
+            logging.error(convertToUX(community) + "Fail")
             pass
     endtime = datetime.datetime.now()
     logging.info("Run time: " + str(endtime - starttime))
@@ -66,7 +66,7 @@ def GetRentByCommunitylist(communitylist):
             get_rent_percommunity(community)
         except Exception as e:
             logging.error(e)
-            logging.error(community + "Fail")
+            logging.error(convertToUX(community) + "Fail")
             pass
     endtime = datetime.datetime.now()
     logging.info("Run time: " + str(endtime - starttime))
@@ -816,8 +816,7 @@ def log_progress(function, address, page, total):
     logging.info("Progress: %s %s: current page %d total pages %d" %(function, address, page, total))
 
 def convertToUX(content):
-    logging.error(content.encode("utf-8"))
-    return content.decode().encode("unicode_escape")
+    return content.encode("unicode_escape")
 
     tmp = ""
     for cr in content:
