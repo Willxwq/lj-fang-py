@@ -143,7 +143,7 @@ def get_house_percommunity(communityname):
                     info_dict.update({u'title':housetitle.a.get_text().strip()})
                     info_dict.update({u'link':housetitle.a.get('href')})
                     houseID = housetitle.a.get('data-lj_action_housedel_id')
-                    if houseID == None
+                    if houseID == None:
                         houseID = housetitle.a.get('data-housecode')
                     logging.info(houseID)
                     info_dict.update({u'houseID':houseID})
