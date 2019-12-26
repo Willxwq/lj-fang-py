@@ -122,11 +122,13 @@ def get_house_percommunity(communityname):
 
     for page in range(total_pages):
         if page > 0:
-            url_page = BASE_URL + u"ershoufang/%s/pg%d/" % (district, page)
+            url_page = BASE_URL + u"ershoufang/pg%drs%s/" % (page, urllib.request.quote(communityname.encode('utf8')))
             source_code = misc.get_source_code(url_page)
             soup = BeautifulSoup(source_code, 'lxml')
+
+        nameList = soup.findAll("li", {"class":"clear"})
         i = 0
-        log_progress("GetHouseByRegionlist", district, page+1, total_pages)
+        log_progress("GetHouseByCommunitylist", communityname, page+1, total_pages)
         data_source = []
         hisprice_data_source = []
         for ultag in soup.findAll("ul", {"class":"sellListContent"}):
