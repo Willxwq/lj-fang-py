@@ -70,7 +70,7 @@ class Houseinfo(BaseModel):
 	followInfo 	= CharField()
 	decoration 	= CharField()
 	validdate 	= DateTimeField(default=datetime.datetime.now)
-    shelf 	    = IntegerField(default=1)
+	shelf 	    = IntegerField(default=1)
 
 class Hisprice(BaseModel):
 	houseID 	= CharField()
