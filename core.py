@@ -118,8 +118,9 @@ def get_house_percommunity(communityname):
         return
     total_pages = misc.get_total_pages(url)
     if total_pages == None:
-        row = model.Houseinfo.select().count()
-        raise RuntimeError("Finish at %s because total_pages is None" % row)
+        return
+        #row = model.Houseinfo.select().count()
+        #raise RuntimeError("Finish at %s because total_pages is None" % row)
 
     for page in range(total_pages):
         if page > 0:
