@@ -144,9 +144,8 @@ def get_house_percommunity(communityname):
                     logging.info(housetitle.a.get_text().strip())
                     info_dict.update({u'houseID':houseID})
 
-
                     houseinfo = name.find("div", {"class":"houseInfo"})
-                    info = houseinfo.get_text().split('/')
+                    info = houseinfo.get_text().split('|')
                     info_dict.update({u'community':info[0].strip()})
                     info_dict.update({u'housetype':info[1].strip()})
                     info_dict.update({u'square':info[2].strip()})
@@ -179,6 +178,7 @@ def get_house_percommunity(communityname):
                 hisprice_data_source.append({"houseID":info_dict["houseID"], "totalPrice":info_dict["totalPrice"]})
                 #model.Houseinfo.insert(**info_dict).upsert().execute()
                 #model.Hisprice.insert(houseID=info_dict['houseID'], totalPrice=info_dict['totalPrice']).upsert().execute()
+            break
 
         with model.database.atomic():
             model.Houseinfo.insert_many(data_source).upsert().execute()
