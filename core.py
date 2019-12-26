@@ -27,6 +27,18 @@ def GetHouseByCommunitylist(communitylist):
     endtime = datetime.datetime.now()
     logging.info("Run time: " + str(endtime - starttime))
 
+def GetHouseByRegionlist(regionlist=[u'xicheng']):
+    starttime = datetime.datetime.now()
+    for regionname in regionlist:
+        logging.info("Get Onsale House Infomation in %s" % regionname)
+        try:
+            get_house_perregion(regionname)
+        except Exception as e:
+            logging.error(e)
+            pass
+    endtime = datetime.datetime.now()
+    logging.info("Run time: " + str(endtime - starttime))
+
 def GetHouseNum(communitylist):
     logging.info("Get House Infomation")
     starttime = datetime.datetime.now()
@@ -85,18 +97,6 @@ def GetCommunityByRegionlist(regionlist=[u'xicheng']):
     endtime = datetime.datetime.now()
     logging.info("Run time: " + str(endtime - starttime))
 
-def GetHouseByRegionlist(regionlist=[u'xicheng']):
-    starttime = datetime.datetime.now()
-    for regionname in regionlist:
-        logging.info("Get Onsale House Infomation in %s" % regionname)
-        try:
-            get_house_perregion(regionname)
-        except Exception as e:
-            logging.error(e)
-            pass
-    endtime = datetime.datetime.now()
-    logging.info("Run time: " + str(endtime - starttime))
-
 def GetRentByRegionlist(regionlist=[u'xicheng']):
     starttime = datetime.datetime.now()
     for regionname in regionlist:
@@ -110,6 +110,82 @@ def GetRentByRegionlist(regionlist=[u'xicheng']):
     logging.info("Run time: " + str(endtime - starttime))
 
 def get_house_percommunity(communityname):
+    url = BASE_URL + u"ershoufang/rs" + urllib.request.quote(communityname.encode('utf8')) + "/"
+    source_code = misc.get_source_code(url)
+    soup = BeautifulSoup(source_code, 'lxml')
+    if check_block(soup):
+        return
+    total_pages = misc.get_total_pages(url)
+    if total_pages == None:
+        row = model.Houseinfo.select().count()
+        raise RuntimeError("Finish at %s because total_pages is None" % row)
+
+    for page in range(total_pages):
+        if page > 0:
+            url_page = BASE_URL + u"ershoufang/%s/pg%d/" % (district, page)
+            source_code = misc.get_source_code(url_page)
+            soup = BeautifulSoup(source_code, 'lxml')
+        i = 0
+        log_progress("GetHouseByRegionlist", district, page+1, total_pages)
+        data_source = []
+        hisprice_data_source = []
+        for ultag in soup.findAll("ul", {"class":"sellListContent"}):
+            for name in ultag.find_all('li'):
+                i = i + 1
+                info_dict = {}
+                try:
+                    housetitle = name.find("div", {"class":"title"})
+                    info_dict.update({u'title':housetitle.a.get_text().strip()})
+                    info_dict.update({u'link':housetitle.a.get('href')})
+                    houseID = housetitle.a.get('data-housecode')
+                    info_dict.update({u'houseID':houseID})
+
+
+                    houseinfo = name.find("div", {"class":"houseInfo"})
+                    if CITY == 'bj':
+                        info = houseinfo.get_text().split('/')
+                    else:
+                        info = houseinfo.get_text().split('|')
+                    info_dict.update({u'housetype':info[0]})
+                    info_dict.update({u'square':info[1]})
+                    info_dict.update({u'direction':info[2]})
+                    info_dict.update({u'decoration':info[3]})
+                    info_dict.update({u'floor':info[4]})
+                    info_dict.update({u'years':info[5]})
+
+                    housefloor = name.find("div", {"class":"positionInfo"})
+                    housefloorInfo = housefloor.get_text().split('   -  ')
+                    info_dict.update({u'community':housefloorInfo[0]})
+
+                    followInfo = name.find("div", {"class":"followInfo"})
+                    info_dict.update({u'followInfo':followInfo.get_text().strip()})
+
+                    taxfree = name.find("span", {"class":"taxfree"})
+                    if taxfree == None:
+                        info_dict.update({u"taxtype":""})
+                    else:
+                        info_dict.update({u"taxtype":taxfree.get_text().strip()})
+
+                    totalPrice = name.find("div", {"class":"totalPrice"})
+                    info_dict.update({u'totalPrice':totalPrice.span.get_text()})
+
+                    unitPrice = name.find("div", {"class":"unitPrice"})
+                    info_dict.update({u'unitPrice':unitPrice.get("data-price")})
+                except:
+                    continue
+
+                # Houseinfo insert into mysql
+                data_source.append(info_dict)
+                hisprice_data_source.append({"houseID":info_dict["houseID"], "totalPrice":info_dict["totalPrice"]})
+                #model.Houseinfo.insert(**info_dict).upsert().execute()
+                #model.Hisprice.insert(houseID=info_dict['houseID'], totalPrice=info_dict['totalPrice']).upsert().execute()
+
+        with model.database.atomic():
+            model.Houseinfo.insert_many(data_source).upsert().execute()
+            model.Hisprice.insert_many(hisprice_data_source).upsert().execute()
+        time.sleep(1)
+
+def get_house_percommunity_old(communityname):
     url = BASE_URL + u"ershoufang/rs" + urllib.request.quote(communityname.encode('utf8')) + "/"
     source_code = misc.get_source_code(url)
     soup = BeautifulSoup(source_code, 'lxml')
