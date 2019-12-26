@@ -19,6 +19,7 @@ def GetHouseByCommunitylist(communitylist):
     starttime = datetime.datetime.now()
     for community in communitylist:
         try:
+            logging.info(community)
             get_house_percommunity(community)
         except Exception as e:
             logging.error(e)
@@ -126,7 +127,6 @@ def get_house_percommunity(communityname):
             source_code = misc.get_source_code(url_page)
             soup = BeautifulSoup(source_code, 'lxml')
 
-        nameList = soup.findAll("li", {"class":"clear"})
         i = 0
         log_progress("GetHouseByCommunitylist", communityname, page+1, total_pages)
         data_source = []
