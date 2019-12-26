@@ -111,6 +111,7 @@ def GetRentByRegionlist(regionlist=[u'xicheng']):
 
 def get_house_percommunity(communityname):
     url = BASE_URL + u"ershoufang/rs" + urllib.request.quote(communityname.encode('utf8')) + "/"
+    logging.info(url)
     source_code = misc.get_source_code(url)
     soup = BeautifulSoup(source_code, 'lxml')
     if check_block(soup):
@@ -145,10 +146,7 @@ def get_house_percommunity(communityname):
 
 
                     houseinfo = name.find("div", {"class":"houseInfo"})
-                    if CITY == 'bj':
-                        info = houseinfo.get_text().split('/')
-                    else:
-                        info = houseinfo.get_text().split('|')
+                    info = houseinfo.get_text().split('/')
                     info_dict.update({u'community':info[0].strip()})
                     info_dict.update({u'housetype':info[1].strip()})
                     info_dict.update({u'square':info[2].strip()})
