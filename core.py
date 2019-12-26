@@ -128,10 +128,13 @@ def get_house_percommunity(communityname):
             soup = BeautifulSoup(source_code, 'lxml')
 
         i = 0
+        a = 0
         log_progress("GetHouseByCommunitylist", communityname, page+1, total_pages)
         data_source = []
         hisprice_data_source = []
         for ultag in soup.findAll("ul", {"class":"sellListContent"}):
+            a = a + 1
+            logging.info(a)
             for name in ultag.find_all('li'):
                 i = i + 1
                 info_dict = {}
@@ -141,7 +144,6 @@ def get_house_percommunity(communityname):
                     info_dict.update({u'link':housetitle.a.get('href')})
                     houseID = housetitle.a.get('data-lj_action_housedel_id')
                     logging.info(houseID)
-                    logging.info(housetitle.a.get_text().strip())
                     info_dict.update({u'houseID':houseID})
 
                     houseinfo = name.find("div", {"class":"houseInfo"})
