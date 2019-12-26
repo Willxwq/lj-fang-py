@@ -19,7 +19,6 @@ def GetHouseByCommunitylist(communitylist):
     starttime = datetime.datetime.now()
     for community in communitylist:
         try:
-            logging.info(community)
             get_house_percommunity(community)
         except Exception as e:
             logging.error(e)
@@ -140,6 +139,7 @@ def get_house_percommunity(communityname):
                     info_dict.update({u'title':housetitle.a.get_text().strip()})
                     info_dict.update({u'link':housetitle.a.get('href')})
                     houseID = housetitle.a.get('data-housecode')
+                    logging.info(houseID)
                     info_dict.update({u'houseID':houseID})
 
 
