@@ -2,7 +2,7 @@
 import model
 import settings
 import logging
-logging.basicConfig(filename=settings.LOGPATH, filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
+logging.basicConfig(filename=settings.LOGPATH, filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.ERROR)
 import core
 
 def get_communitylist():
