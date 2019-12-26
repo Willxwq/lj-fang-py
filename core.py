@@ -543,7 +543,7 @@ def get_house_perregion(district):
                     info_dict.update({u'years':info[5]})
 
                     housefloor = name.find("div", {"class":"positionInfo"})
-                    housefloorInfo = houseinfo.get_text().split('   -  ')
+                    housefloorInfo = housefloor.get_text().split('   -  ')
                     info_dict.update({u'community':housefloorInfo[0]})
 
                     followInfo = name.find("div", {"class":"followInfo"})
