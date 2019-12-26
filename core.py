@@ -535,15 +535,17 @@ def get_house_perregion(district):
                         info = houseinfo.get_text().split('/')
                     else:
                         info = houseinfo.get_text().split('|')
-                    info_dict.update({u'community':info[6]})
+                    info_dict.update({u'community':info[7]})
                     info_dict.update({u'housetype':info[0]})
                     info_dict.update({u'square':info[4]})
                     info_dict.update({u'direction':info[2]})
                     info_dict.update({u'decoration':info[3]})
+                    info_dict.update({u'years':info[5]})
+                    info_dict.update({u'floor':info[1]})
 
-                    housefloor = name.find("div", {"class":"positionInfo"})
-                    info_dict.update({u'years':housefloor.get_text().strip()})
-                    info_dict.update({u'floor':housefloor.get_text().strip()})
+                    #housefloor = name.find("div", {"class":"positionInfo"})
+                    #info_dict.update({u'years':housefloor.get_text().strip()})
+                    #info_dict.update({u'floor':housefloor.get_text().strip()})
 
                     followInfo = name.find("div", {"class":"followInfo"})
                     info_dict.update({u'followInfo':followInfo.get_text().strip()})
