@@ -8,6 +8,7 @@ import datetime
 #import urllib2
 import urllib.request
 import logging
+import json
 
 #logging.basicConfig(filename='/data/wwwlogs/python/sh.log', filemode="a", format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
 #logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.ERROR)
