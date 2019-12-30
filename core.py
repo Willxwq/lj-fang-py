@@ -128,7 +128,6 @@ def get_house_percommunity(communityname):
             soup = BeautifulSoup(source_code, 'lxml')
 
         i = 0
-        a = 0
         log_progress("GetHouseByCommunitylist", communityname, page+1, total_pages)
         data_source = []
         hisprice_data_source = []
@@ -180,12 +179,12 @@ def get_house_percommunity(communityname):
 
                 # Houseinfo insert into mysql
                 data_source.append(info_dict)
+                logging.info("info_dict : " + info_dict)
                 hisprice_data_source.append({"houseID":info_dict["houseID"], "totalPrice":info_dict["totalPrice"]})
                 #model.Houseinfo.insert(**info_dict).upsert().execute()
                 #model.Hisprice.insert(houseID=info_dict['houseID'], totalPrice=info_dict['totalPrice']).upsert().execute()
 
         with model.database.atomic():
-            logging.info("data_source : " + data_source)
             model.Houseinfo.insert_many(data_source).upsert().execute()
             model.Hisprice.insert_many(hisprice_data_source).upsert().execute()
         time.sleep(1)
