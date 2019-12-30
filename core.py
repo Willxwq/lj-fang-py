@@ -117,7 +117,6 @@ def get_house_percommunity(communityname):
     if check_block(soup):
         return
     total_pages = misc.get_total_pages(url)
-    logging.info("total_pages : " + total_pages)
     if total_pages == None:
         return
         #row = model.Houseinfo.select().count()
