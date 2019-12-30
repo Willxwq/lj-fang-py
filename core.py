@@ -111,7 +111,6 @@ def GetRentByRegionlist(regionlist=[u'xicheng']):
 
 def get_house_percommunity(communityname):
     url = BASE_URL + u"ershoufang/rs" + urllib.request.quote(communityname.encode('utf8')) + "/"
-    logging.info(url)
     source_code = misc.get_source_code(url)
     soup = BeautifulSoup(source_code, 'lxml')
     if check_block(soup):
@@ -134,8 +133,6 @@ def get_house_percommunity(communityname):
         data_source = []
         hisprice_data_source = []
         for ultag in soup.findAll("ul", {"class":"sellListContent"}):
-            a = a + 1
-            logging.info(a)
             for name in ultag.find_all('li'):
                 i = i + 1
                 info_dict = {}
@@ -186,9 +183,9 @@ def get_house_percommunity(communityname):
                 hisprice_data_source.append({"houseID":info_dict["houseID"], "totalPrice":info_dict["totalPrice"]})
                 #model.Houseinfo.insert(**info_dict).upsert().execute()
                 #model.Hisprice.insert(houseID=info_dict['houseID'], totalPrice=info_dict['totalPrice']).upsert().execute()
-            break
 
         with model.database.atomic():
+            logging.info("data_source : " + data_source)
             model.Houseinfo.insert_many(data_source).upsert().execute()
             model.Hisprice.insert_many(hisprice_data_source).upsert().execute()
         time.sleep(1)
