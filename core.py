@@ -146,6 +146,8 @@ def get_house_percommunity(communityname):
                     houseID = housetitle.a.get('data-lj_action_housedel_id')
                     if houseID == None:
                         houseID = housetitle.a.get('data-housecode')
+                    if houseID == None:
+                        continue
                     info_dict.update({u'houseID':houseID})
 
                     houseinfo = name.find("div", {"class":"houseInfo"})
