@@ -54,11 +54,15 @@ def get_total_pages(url):
     total_pages = 0
     try:
         page_info = soup.find('div',{'class':'page-box house-lst-page-box'})
+        result_info = soup.find('div',{'class':'m-noresult'})
     except AttributeError as e:
         page_info = None
 
     if page_info == None:
         return None
+    if result_info != None && result_info.get_text().strip() == "当前小区暂无在售房源，为您推荐附近房源"
+        return None
+
     page_info_str = page_info.get('page-data').split(',')[0]  #'{"totalPage":5,"curPage":1}'
     total_pages = int(page_info_str.split(':')[1])
     if total_pages > 0:
