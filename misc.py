@@ -60,8 +60,9 @@ def get_total_pages(url):
 
     if page_info == None:
         return None
-    if result_info != None && result_info.get_text().strip() == "当前小区暂无在售房源，为您推荐附近房源":
-        return None
+    if result_info != None:
+        if result_info.get_text().strip() == "当前小区暂无在售房源，为您推荐附近房源":
+            return None
 
     page_info_str = page_info.get('page-data').split(',')[0]  #'{"totalPage":5,"curPage":1}'
     total_pages = int(page_info_str.split(':')[1])
