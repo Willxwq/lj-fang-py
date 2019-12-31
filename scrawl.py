@@ -7,8 +7,8 @@ import core
 
 def get_communitylist():
 	res = []
-	for community in model.Community.select().where(model.Community.useFlg == 0):
-	#for community in model.Community.select():
+	#for community in model.Community.select().where(model.Community.useFlg == 0):
+	for community in model.Community.select():
 		res.append(community.title)
 	return res
 
