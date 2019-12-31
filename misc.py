@@ -61,6 +61,7 @@ def get_total_pages(url):
     if page_info == None:
         return None
     if result_info != None:
+        logging.info("str : " + result_info.get_text().strip())
         if result_info.get_text().strip() == "当前小区暂无在售房源，为您推荐附近房源":
             return None
 
