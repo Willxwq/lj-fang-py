@@ -16,7 +16,7 @@ if __name__=="__main__":
     regionlist = settings.REGIONLIST # only pinyin support
     model.database_init()
     communitylist = get_communitylist() # Read celllist from database
-    core.GetHouseByCommunitylist(communitylist) #根据小区
+    #core.GetHouseByCommunitylist(communitylist) #根据小区
     #core.GetHouseByRegionlist(regionlist) #根据区域
     #core.GetRentByRegionlist(regionlist)
     #core.GetCommunityByRegionlist(regionlist) # Init,scrapy celllist and insert database; could run only 1st time
