@@ -115,6 +115,7 @@ def get_house_percommunity(communityname):
     source_code = misc.get_source_code(url)
     logging.info(url)
     soup = BeautifulSoup(source_code, 'lxml')
+    sys.exit(url)
     if check_block(soup):
         return
     total_pages = misc.get_total_pages(url)
