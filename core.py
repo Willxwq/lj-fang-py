@@ -892,6 +892,8 @@ def get_sellInfo_by_url(url):
     return res
 
 def check_block(soup):
+    if soup is None:
+        return False
     if soup.title.string == "414 Request-URI Too Large":
         logging.error("Lianjia block your ip, please verify captcha manually at lianjia.com")
         return True
