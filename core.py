@@ -113,9 +113,6 @@ def GetRentByRegionlist(regionlist=[u'xicheng']):
 def get_house_percommunity(communityname):
     url = BASE_URL + u"ershoufang/rs" + urllib.request.quote(communityname.encode('utf8')) + "/"
     source_code = misc.get_source_code(url)
-    logging.info(url)
-    logging.info(source_code)
-    exit()
     soup = BeautifulSoup(source_code, 'lxml')
     if check_block(soup):
         return
@@ -895,8 +892,6 @@ def get_sellInfo_by_url(url):
     return res
 
 def check_block(soup):
-    if soup is None:
-        return False
     if soup.title.string == "414 Request-URI Too Large":
         logging.error("Lianjia block your ip, please verify captcha manually at lianjia.com")
         return True
