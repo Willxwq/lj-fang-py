@@ -113,6 +113,7 @@ def GetRentByRegionlist(regionlist=[u'xicheng']):
 def get_house_percommunity(communityname):
     url = BASE_URL + u"ershoufang/rs" + urllib.request.quote(communityname.encode('utf8')) + "/"
     source_code = misc.get_source_code(url)
+    logging.info(url)
     logging.info(source_code)
     exit()
     soup = BeautifulSoup(source_code, 'lxml')
